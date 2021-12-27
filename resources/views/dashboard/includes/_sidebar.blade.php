@@ -99,7 +99,7 @@
             </li>
 
 
-            <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
+            <li class=" nav-item"><a href="#"><i class="la la-support"></i><span class="menu-title"
                                                                                     data-i18n="nav.templates.main">الإعدادات</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">وسائل التوصيل</a>

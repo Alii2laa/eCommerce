@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Dashboard','middleware'=>'auth:admin'],function (){
 
     Route::get('/', 'dashboardController@index')->name('admin.dashboard');
+    Route::get('/user',function (){
+      return "pls login";
+    });
 //    Route::group(['prefix'=>'settings'],function (){
 //        Route::get('shipping/{type}','SettingsController@editShippingMethod')->name('edit.shipping.method');
 //        Route::put('shipping/{id}','SettingsController@updateShippingMethod')->name('update.shipping.method');
