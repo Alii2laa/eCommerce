@@ -99,18 +99,20 @@
             </li>
 
 
-            <li class=" nav-item"><a href="#"><i class="la la-support"></i><span class="menu-title"
-                                                                                    data-i18n="nav.templates.main">الإعدادات</span></a>
+            <li class=" nav-item">
+                <a href="#"><i class="la la-support"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">{{ __('admin/sidebar.settings') }}</span>
+                </a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">وسائل التوصيل</a>
+                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">{{ __('admin/sidebar.shippingMethods') }}</a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href="{{('edit.shipping.methodfree')}}"
-                                   data-i18n="nav.templates.vert.classic_menu">توصيل مجاني</a>
+                            <li><a class="menu-item" href="{{route('edit.shipping.method','free')}}"
+                                   data-i18n="nav.templates.vert.classic_menu">{{ __('admin/sidebar.freeShip') }}</a>
                             </li>
-                            <li><a class="menu-item" href="{{('edit.shipping.methodinner')}}">توصيل داخلي</a>
+                            <li><a class="menu-item" href="{{route('edit.shipping.method','inner')}}">{{ __('admin/sidebar.localShip') }}</a>
                             </li>
-                            <li><a class="menu-item" href="{{('edit.shipping.methodouter')}}"
-                                   data-i18n="nav.templates.vert.compact_menu">توصيل خارجي</a>
+                            <li><a class="menu-item" href="{{route('edit.shipping.method','outer')}}"
+                                   data-i18n="nav.templates.vert.compact_menu">{{ __('admin/sidebar.outerShip') }}</a>
                             </li>
                         </ul>
                     </li>

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title')
+
 @endsection
 
 @section('content')
@@ -11,7 +12,6 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                {{ LaravelLocalization::getCurrentLocale() }}
                                 <li class="breadcrumb-item"><a href="">الرئيسية </a>
                                 </li>
 
