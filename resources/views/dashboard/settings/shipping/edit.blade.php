@@ -57,11 +57,8 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> الاسم </label>
-                                                            <input type="text" value="{{$shippingMethod->value}}" id="name"
-                                                                   class="form-control"
-                                                                   placeholder="  "
-                                                                   name="value">
+                                                            <label for="projectinput1"> {{__('admin/sidebar.shippingLabel')}} </label>
+                                                            <input type="text" value="{{$shippingMethod->value}}" class="form-control" placeholder="" name="value">
                                                             @error("value")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -70,13 +67,13 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> قيمه التوصيل </label>
+                                                            <label for="projectinput1">{{__('admin/sidebar.shippingValue')}}</label>
                                                             <input type="number" value="{{$shippingMethod->plain_value}}" id="plain_value"
                                                                    class="form-control"
                                                                    placeholder="  "
                                                                    name="plain_value">
                                                             @error("plain_value")
-                                                            <span class="text-danger"></span>
+                                                            <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -87,13 +84,23 @@
                                             </div>
 
                                             <div class="form-actions">
-                                                <button type="button" class="btn btn-warning mr-1"
-                                                        onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
-                                                </button>
+                                                @if(app()->getLocale() === 'en')
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="la la-check-square-o"></i> {{__('admin/sidebar.shippingBTNSave')}}
+                                                    </button>
+                                                    <button type="button" class="btn btn-warning mr-1"
+                                                            onclick="history.back();">
+                                                        <i class="ft-x"></i> {{__('admin/sidebar.shippingBTN')}}
+                                                    </button>
+                                                @else
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="la la-check-square-o"></i> {{__('admin/sidebar.shippingBTNSave')}}
+                                                    </button>
+                                                    <button type="button" class="btn btn-warning mr-1"
+                                                            onclick="history.back();">
+                                                        <i class="ft-x"></i> {{__('admin/sidebar.shippingBTN')}}
+                                                    </button>
+                                                @endif
                                             </div>
                                         </form>
                                     </div>
