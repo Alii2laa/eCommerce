@@ -13,6 +13,7 @@ class LoginController extends Controller
         return view('dashboard.auth.login');
     }
 
+
     public function loginAdmin(AdminLoginValid $request){
 
         $remember_me = $request->has('remember_me') ? true : false;
@@ -22,4 +23,16 @@ class LoginController extends Controller
         }
         return redirect()->back()->with(['error'=>'هناك خطأ في بيانات الدخول']);
     }
+
+    public function adminLogout(){
+        $gaurd = $this->getGaurd();
+        $gaurd->logout();
+        return redirect()->route('admin.login');
+    }
+
+    private function getGaurd()
+    {
+        return auth('admin');
+    }
+
 }

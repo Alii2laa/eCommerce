@@ -17,7 +17,7 @@ class Authenticate extends Middleware
     {
         $local=app()->getLocale();
         if (! $request->expectsJson()) {
-            if(Request::is($local.'/admin/*')){
+            if(Request::is($local.'/admin*')){
                 return route('admin.login');
             }else{
                 return route('logi00n');
