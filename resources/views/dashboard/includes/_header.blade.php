@@ -30,20 +30,39 @@
                 <ul class="nav navbar-nav float-right">
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                <span class="mr-1">مرجبا
+                <span class="mr-1">{{__('admin/header.adminHello')}}
                   <span
                       class="user-name text-bold-700">{{auth('admin')->user()->name}}</span>
                 </span>
-                            <span class="avatar avatar-online">
-                  <img  style="height: 35px;" src="" alt="avatar"><i></i></span>
+
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href=""><i
-                                    class="ft-user"></i> تعديل الملف الشحصي </a>
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="{{route('editAdminProfile')}}"><i
+                                    class="ft-user"></i> {{__('admin/header.adminProfile')}} </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{route('adminLogout')}}"><i class="ft-power"></i> تسجيل الخروج</a>
+                            <a class="dropdown-item" href="{{route('adminLogout')}}"><i class="ft-power"></i> {{__('admin/header.adminLogout')}}</a>
                         </div>
                     </li>
+                    <li class="dropdown dropdown-user nav-item">
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                <span class="mr-1">
+                    <span class="user-name text-bold-700">{{__('admin/header.adminLangs')}} => </span>
+                    <span class="user-name text-bold-700">{{app()->getLocale()}}</span>
+                </span>
+                        </a>
 
+                        <div class="dropdown-menu dropdown-menu-right">
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+                                <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                                @if($localeCode == 'en')
+                                    <div class="dropdown-divider"></div>
+                                @endif
+
+                            @endforeach
+                        </div>
+                    </li>
                     <li class="dropdown dropdown-notification nav-item">
                         <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
                             <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">5</span>

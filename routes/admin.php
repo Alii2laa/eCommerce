@@ -25,9 +25,15 @@ Route::group(
 
             Route::get('/', 'dashboardController@index')->name('admin.dashboard');
             Route::get('logout','LoginController@adminLogout')->name('adminLogout');
+
             Route::group(['prefix'=>'settings'],function (){
                 Route::get('shipping/{type}','SettingsController@editShippingMethod')->name('edit.shipping.method');
                 Route::put('shipping/{id}','SettingsController@updateShippingMethod')->name('update.shipping.method');
+            });
+
+            Route::group(['prefix'=>'profile'],function (){
+                Route::get('edit','ProfileController@editAdminProfile')->name('editAdminProfile');
+                Route::put('update/{id}','ProfileController@updateAdminProfile')->name('updateAdminProfile');
             });
 
 
