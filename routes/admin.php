@@ -54,6 +54,15 @@ Route::group(
                 Route::get('delete/{id}','SubCategoryController@destroy')->name('adminSubCategoryDelete');
             });
 
+            Route::group(['prefix'=>'brands'],function (){
+                Route::get('/','BrandsController@index')->name('adminBrands');
+                Route::get('create','BrandsController@create')->name('adminBrandsCreate');
+                Route::post('store','BrandsController@store')->name('adminBrandsStore');
+                Route::get('edit/{id}','BrandsController@edit')->name('adminBrandsEdit');
+                Route::post('update/{id}','BrandsController@update')->name('adminBrandsUpdate');
+                Route::get('delete/{id}','BrandsController@destroy')->name('adminBrandsDelete');
+            });
+
 
         });
 

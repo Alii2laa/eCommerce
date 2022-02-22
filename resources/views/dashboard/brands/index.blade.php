@@ -5,13 +5,13 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title"> الاقسام الفرعية </h3>
+                    <h3 class="content-header-title"> الماركات التجارية </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
+                                <li class="breadcrumb-item"><a href="{{route('adminBrands')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active"> الاقسام الفرعية
+                                <li class="breadcrumb-item active">الماركات
                                 </li>
                             </ol>
                         </div>
@@ -25,7 +25,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">جميع الاقسام الفرعية </h4>
+                                    <h4 class="card-title">جميع الماركات </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -48,30 +48,27 @@
                                             <thead class="">
                                             <tr>
                                                 <th>الاسم </th>
-                                                <th>القسم الرئيسي </th>
-                                                <th> الاسم بالرابط </th>
                                                 <th>الحالة</th>
                                                 <th>صوره القسم</th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @isset($categoriesData);
-                                                @foreach($categoriesData as $CatData)
+                                            @isset($brands);
+                                                @foreach($brands as $brand)
                                                     <tr>
-                                                        <td>{{$CatData->name}}</td>
-                                                        <td>{{$CatData->MainCat->name}}</td>
-                                                        <td>{{$CatData->slug}}</td>
-                                                        <td>{{$CatData->getActive()}}</td>
-                                                        <td> <img style="width: 150px; height: 100px;" src=" "></td>
+                                                        <td>{{$brand->name}}</td>
+
+                                                        <td>{{$brand->getActive()}}</td>
+                                                        <td> <img style="width: 150px; height: 100px;" src="{{$brand->getPhoto($brand->photo)}}"></td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                <a href="{{route('adminSubCategoryEdit',$CatData->id)}}"
+                                                                <a href="{{route('adminBrandsEdit',$brand->id)}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
 
 
-                                                                <a href="{{route('adminSubCategoryDelete',$CatData->id)}}"
+                                                                <a href="{{route('adminBrandsDelete',$brand->id)}}"
                                                                    class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
 
 
