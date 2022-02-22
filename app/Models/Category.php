@@ -24,4 +24,16 @@ class Category extends Model
     protected $casts =[
         'is_active' => 'boolean'
     ];
+
+    public function scopeParent($query){
+        return $query -> whereNull('parent_id');
+    }
+    public function scopeChild($query){
+        return $query -> whereNotNull('parent_id');
+    }
+
+    public function getActive(){
+        return $this->is_active == 1 ? 'مفعل' : 'غير مفعل';
+
+    }
 }

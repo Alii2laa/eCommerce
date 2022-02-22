@@ -36,6 +36,24 @@ Route::group(
                 Route::put('update/{id}','ProfileController@updateAdminProfile')->name('updateAdminProfile');
             });
 
+            Route::group(['prefix'=>'main-category'],function (){
+                Route::get('/','MainCategoryController@index')->name('adminMainCategory');
+                Route::get('create','MainCategoryController@create')->name('adminMainCategoryCreate');
+                Route::post('store','MainCategoryController@store')->name('adminMainCategoryStore');
+                Route::get('edit/{id}','MainCategoryController@edit')->name('adminMainCategoryEdit');
+                Route::post('update/{id}','MainCategoryController@update')->name('adminMainCategoryUpdate');
+                Route::get('delete/{id}','MainCategoryController@destroy')->name('adminMainCategoryDelete');
+            });
+
+            Route::group(['prefix'=>'sub-category'],function (){
+                Route::get('/','SubCategoryController@index')->name('adminSubCategory');
+                Route::get('create','SubCategoryController@create')->name('adminSubCategoryCreate');
+                Route::post('store','SubCategoryController@store')->name('adminSubCategoryStore');
+                Route::get('edit/{id}','SubCategoryController@edit')->name('adminSubCategoryEdit');
+                Route::post('update/{id}','SubCategoryController@update')->name('adminSubCategoryUpdate');
+                Route::get('delete/{id}','SubCategoryController@destroy')->name('adminSubCategoryDelete');
+            });
+
 
         });
 
