@@ -60,7 +60,7 @@
                                                 @foreach($categoriesData as $CatData)
                                                     <tr>
                                                         <td>{{$CatData->name}}</td>
-                                                        <td>{{$CatData->parent_id}}</td>
+                                                        <td>{{$CatData->MainCat->name ?? ''}}</td>
                                                         <td>{{$CatData->slug}}</td>
                                                         <td>{{$CatData->getActive()}}</td>
                                                         <td> <img style="width: 150px; height: 100px;" src=" "></td>

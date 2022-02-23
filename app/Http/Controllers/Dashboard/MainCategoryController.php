@@ -18,7 +18,7 @@ class MainCategoryController extends Controller
      */
     public function index()
     {
-        $categoriesData = Category::parent()->orderBy('id','desc')->paginate(PAGINATION_COUNT);
+        $categoriesData = Category::with('MainCat')->orderBy('id','desc')->paginate(PAGINATION_COUNT);
         return view('dashboard.categories.index',compact('categoriesData'));
     }
 
@@ -29,7 +29,8 @@ class MainCategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.categories.create');
+        $categoriesData = Category::select('id','parent_id')->get();
+        return view('dashboard.categories.create',compact('categoriesData'));
     }
 
     /**
@@ -40,6 +41,7 @@ class MainCategoryController extends Controller
      */
     public function store(MainCategoryRequest $request)
     {
+
         $localLan = app()->getLocale();
 
         try {
@@ -49,6 +51,9 @@ class MainCategoryController extends Controller
             else
                 $request->request->add(['is_active' => 0]);
 
+            if($request->type == 1){
+                $request->request->add(['parent_id' => null]);
+            }
 
             $catData = Category::create($request->except('_token'));
 

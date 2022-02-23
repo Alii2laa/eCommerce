@@ -54,15 +54,15 @@ class BrandsController extends Controller
             if($request->has('photo')){
                 $fileName = uploadImage('brands',$request->photo);
             }
-            $brands = Brand::create($request->except('_token','photo'));
+            $brands = Brand::create($request->except('_token','photo','id'));
 
             $brands->translateOrNew($localLan)->name = $request->name;
             $brands->photo = $fileName;
             $brands->save();
             DB::commit();
-            return redirect()->route('adminSubCategory')->with(['success' => 'تم الإضافة بنجاح']);
+            return redirect()->route('adminBrands')->with(['success' => 'تم الإضافة بنجاح']);
         } catch (\Exception $ex) {
-            return redirect()->route('adminSubCategory')->with(['error' => 'عفواً هناك خطاً']);
+            return redirect()->route('adminBrands')->with(['error' => 'عفواً هناك خطاً']);
         }
 
 
@@ -88,7 +88,11 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
+        $brandsData = Brand::orderBy('id','desc')->find($id);
+        if(!$brandsData)
+            return redirect()->route('adminBrands')->with(['error'=>'هذه الماركة غير موجود']);
 
+        return view('dashboard.brands.edit',compact('brandsData'));
     }
 
     /**
@@ -98,14 +102,38 @@ class BrandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MainCategoryRequest $request, $id)
+    public function update(BrandsRequest $request, $id)
     {
-
+        $localLan = app()->getLocale();
         try {
 
-            return redirect()->route('adminMainCategory')->with(['success' => 'تم التحديث بنجاح']);
+            $brandsData = Brand::find($id);
+            if(!$brandsData)
+                return redirect()->route('adminBrands')->with(['error'=>'هذه الماركة غير موجود']);
+            DB::beginTransaction();
+            if($request->has('photo')){
+                $file_path = public_path().'/assets/images/brands/'.$brandsData->photo;
+                unlink($file_path);
+                $fileName = uploadImage('brands',$request->photo);
+                Brand::where('id',$id)
+                    ->update([
+                        'photo' => $fileName
+                    ]);
+
+            }
+            if($request->filled('is_active'))
+                $request->request->add(['is_active' => 1]);
+            else
+                $request->request->add(['is_active' => 0]);
+            $brandsData->update($request->except('_token','photo','id'));
+
+            $brandsData->translateOrNew($localLan)->name = $request->name;
+            $brandsData->save();
+            DB::commit();
+            return redirect()->route('adminBrands')->with(['success' => 'تم التحديث بنجاح']);
         } catch (\Exception $ex) {
-            return redirect()->route('adminMainCategory')->with(['error' => 'هذا القسم غير موجود']);
+            DB::rollBack();
+            return redirect()->route('adminBrands')->with(['error' => 'هذه الماركه غير موجود']);
         }
     }
 
@@ -118,10 +146,18 @@ class BrandsController extends Controller
     public function destroy($id)
     {
         try {
+            $brandsData = Brand::find($id);
+            if(!$brandsData)
+                return redirect()->route('adminBrands')->with(['error' => 'هذه الماركة غير موجود']);
 
-            return redirect()->route('adminMainCategory')->with(['success' => 'تم الحذف بنجاح']);
+            $file_path = public_path().'/assets/images/brands/'.$brandsData->photo;
+            unlink($file_path);
+            $brandsData->delete();
+
+
+            return redirect()->route('adminBrands')->with(['success' => 'تم الحذف بنجاح']);
         } catch (\Exception $ex) {
-            return redirect()->route('adminMainCategory')->with(['error' => 'هذا القسم غير موجود']);
+            return redirect()->route('adminBrands')->with(['error' => 'هذه الماركة غير موجود']);
         }
     }
 }
