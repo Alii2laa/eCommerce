@@ -36,6 +36,34 @@ Route::group(
                 Route::put('update/{id}','ProfileController@updateAdminProfile')->name('updateAdminProfile');
             });
 
+            Route::group(['prefix'=>'main-category'],function (){
+                Route::get('/','MainCategoryController@index')->name('adminMainCategory');
+                Route::get('create','MainCategoryController@create')->name('adminMainCategoryCreate');
+                Route::post('store','MainCategoryController@store')->name('adminMainCategoryStore');
+                Route::get('edit/{id}','MainCategoryController@edit')->name('adminMainCategoryEdit');
+                Route::post('update/{id}','MainCategoryController@update')->name('adminMainCategoryUpdate');
+                Route::get('delete/{id}','MainCategoryController@destroy')->name('adminMainCategoryDelete');
+            });
+
+
+            Route::group(['prefix'=>'brands'],function (){
+                Route::get('/','BrandsController@index')->name('adminBrands');
+                Route::get('create','BrandsController@create')->name('adminBrandsCreate');
+                Route::post('store','BrandsController@store')->name('adminBrandsStore');
+                Route::get('edit/{id}','BrandsController@edit')->name('adminBrandsEdit');
+                Route::post('update/{id}','BrandsController@update')->name('adminBrandsUpdate');
+                Route::get('delete/{id}','BrandsController@destroy')->name('adminBrandsDelete');
+            });
+
+            Route::group(['prefix'=>'tags'],function (){
+                Route::get('/','TagsController@index')->name('adminTags');
+                Route::get('create','TagsController@create')->name('adminTagsCreate');
+                Route::post('store','TagsController@store')->name('adminTagsStore');
+                Route::get('edit/{id}','TagsController@edit')->name('adminTagsEdit');
+                Route::post('update/{id}','TagsController@update')->name('adminTagsUpdate');
+                Route::get('delete/{id}','TagsController@destroy')->name('adminTagsDelete');
+            });
+
 
         });
 
